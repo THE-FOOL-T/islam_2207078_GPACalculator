@@ -43,7 +43,7 @@
                 <TextField fx:id="cred" layoutX="17.0" layoutY="95.0" prefHeight="25.0" prefWidth="121.0" promptText="Credit" />
                 <ComboBox fx:id="grad" layoutX="167.0" layoutY="95.0" prefHeight="25.0" prefWidth="94.0" promptText="Grade" />
                 <Button fx:id="addCourseBtn" layoutX="28.0" layoutY="147.0" mnemonicParsing="false" onAction="#handleAddCourse" prefHeight="25.0" prefWidth="100.0" text="Add Course" />
-                <Button fx:id="calculateBtn" layoutX="158.0" layoutY="147.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Calculate GPA" />
+                <Button fx:id="calculateBtn" layoutX="158.0" layoutY="147.0" mnemonicParsing="false" onAction="#switchResult" prefHeight="25.0" prefWidth="100.0" text="Calculate GPA" />
             </children>
         </AnchorPane>
     </center>

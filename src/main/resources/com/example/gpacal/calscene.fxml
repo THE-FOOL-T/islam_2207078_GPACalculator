@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="432.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gpacal.HelloController">
+
+    <top>
+        <AnchorPane prefHeight="100.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <Label alignment="CENTER" layoutX="228.0" layoutY="13.0" prefHeight="25.0" prefWidth="167.0" text="GPA CALCUATOR">
+                <font>
+                    <Font size="15.0" />
+                </font>
+            </Label>
+            <Button layoutX="6.0" layoutY="9.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="29.0" text="←" />
+            <Button layoutX="42.0" layoutY="9.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="29.0" text="→">
+                <font>
+                    <Font name="System Bold" size="10.0" />
+                </font>
+            </Button>
+            <Button layoutX="78.0" layoutY="9.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="29.0" text="⟳">
+                <font>
+                    <Font name="System Bold" size="10.0" />
+                </font>
+            </Button>
+            <Label layoutX="12.0" layoutY="50.0" prefHeight="38.0" prefWidth="600.0" text="Enter course name, course No: , course teacher name ,course credit and grade to calculate your GPA" />
+        </AnchorPane>
+    </top>
+
+    <center>
+        <AnchorPane prefHeight="263.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+            <children>
+                <TextField fx:id="csName" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="124.0" promptText="Enter Course name" />
+                <TextField fx:id="csNo" layoutX="158.0" layoutY="14.0" prefHeight="25.0" prefWidth="124.0" promptText="Enter Course No" />
+                <TextField fx:id="teach2" layoutX="158.0" layoutY="56.0" prefHeight="25.0" prefWidth="124.0" promptText="Teacher2 Name" />
+                <TextField fx:id="teach1" layoutX="14.0" layoutY="56.0" prefHeight="25.0" prefWidth="124.0" promptText="Teacher1 Name" />
+                <TextField fx:id="cred" layoutX="17.0" layoutY="95.0" prefHeight="25.0" prefWidth="121.0" promptText="Credit" />
+                <ComboBox fx:id="grad" layoutX="167.0" layoutY="95.0" prefHeight="25.0" prefWidth="94.0" promptText="Grade" />
+                <Button fx:id="addCourseBtn" layoutX="28.0" layoutY="147.0" mnemonicParsing="false" onAction="#handleAddCourse" prefHeight="25.0" prefWidth="100.0" text="Add Course" />
+                <Button fx:id="calculateBtn" layoutX="158.0" layoutY="147.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Calculate GPA" />
+            </children>
+        </AnchorPane>
+    </center>
+
+    <right>
+        <AnchorPane prefWidth="280.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label fx:id="csCountL" layoutX="20.0" layoutY="5.0" text="Total Courses: 0" />
+                <Label fx:id="toalCredL" layoutX="20.0" layoutY="25.0" text="Total Credits: 0" />
+                <Label layoutX="20.0" layoutY="45.0" text="Courses Added" />
+                <ListView fx:id="cslist" layoutX="20.0" layoutY="65.0" prefHeight="260.0" prefWidth="240.0" />
+            </children>
+        </AnchorPane>
+    </right>
+</BorderPane>

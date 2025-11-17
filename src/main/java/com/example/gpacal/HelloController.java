@@ -104,7 +104,8 @@ public class HelloController {
             case "B-":return 2.75;
             case "C+":return 2.5;
             case "C":return 2.25;
-            case "D":return 2.0;
+            case "C-":return 2.00;
+            case "D":return 1.0;
             case "F":return 0.0;
             default:return 0.0;
         }
@@ -127,6 +128,27 @@ public class HelloController {
         stage.setScene((scene));
         stage.show();
 
+    }
+    @FXML
+    public void goBack(ActionEvent event) throws IOException {
+        root=FXMLLoader.load(Objects.requireNonNull(getClass().getResource("hello-view.fxml")));
+        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    @FXML
+    public void reloadPage(ActionEvent event) throws IOException {
+        csDisplay.clear();
+        fullcourse.clear();
+        res.clear();
+        csCount=0;
+        totalCred=0;
+        root=FXMLLoader.load(Objects.requireNonNull(getClass().getResource("calscene.fxml")));
+        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene=new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
 }

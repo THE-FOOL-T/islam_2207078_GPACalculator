@@ -6,10 +6,19 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+
+import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.util.Objects;
 
 public class resultController {
     @FXML
@@ -32,6 +41,7 @@ public class resultController {
     private TableColumn<CourseRow,Double> gradePointColumn;
     @FXML
     private Label totalcredL, gpaL, congratsL;
+
     @FXML
     public void initialize() {
         serialColumn.setCellValueFactory(new PropertyValueFactory<>("serial"));
@@ -47,6 +57,7 @@ public class resultController {
         courseTableView.setPrefHeight(TableView.USE_COMPUTED_SIZE);
         courseTableView.setMaxHeight(TableView.USE_COMPUTED_SIZE);
     }
+
 
     public void setresult(ObservableList<HelloController.courses> courseList) {
         ObservableList<CourseRow> tableData = FXCollections.observableArrayList();
@@ -99,6 +110,24 @@ public class resultController {
         congratsL.setText("Congratulations! Your GPA is shown below.");
     }
 
+
+
+    public void calculateAgain(javafx.event.ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("calscene.fxml")));
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void goHome(javafx.event.ActionEvent event) throws IOException {
+        Parent root=FXMLLoader.load(Objects.requireNonNull(getClass().getResource("hello-view.fxml")));
+        Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene=new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public static class CourseRow {
         private final SimpleIntegerProperty serial;
         private final SimpleStringProperty code;
@@ -144,4 +173,7 @@ public class resultController {
         public double getGradePoint() { return gradePoint.get(); }
         public SimpleDoubleProperty gradePointProperty() { return gradePoint; }
     }
+
+
+
 }

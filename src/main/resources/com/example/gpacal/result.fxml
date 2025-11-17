@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
@@ -45,7 +46,7 @@
         </VBox>
     </center>
     <bottom>
-        <VBox alignment="CENTER" spacing="14" BorderPane.alignment="CENTER">
+        <VBox alignment="CENTER" prefHeight="149.0" prefWidth="963.0" spacing="14" BorderPane.alignment="CENTER">
             <padding>
                 <Insets bottom="20" top="20" />
             </padding>
@@ -53,6 +54,13 @@
             <Label fx:id="congratsL" text="Congratulations! Your GPA is shown below." />
             <Label fx:id="totalcredL" text="Credit Completed : 0" />
             <Label fx:id="gpaL" text="GPA : 0.00" />
+         <AnchorPane prefHeight="200.0" prefWidth="200.0">
+            <children>
+               <Button layoutX="372.0" mnemonicParsing="false" onAction="#calculateAgain" text="calculate again" />
+               <Button layoutX="532.0" mnemonicParsing="false" onAction="#goHome" text="Go home" />
+            </children>
+         </AnchorPane>
+            
         </VBox>
     </bottom>
 </BorderPane>

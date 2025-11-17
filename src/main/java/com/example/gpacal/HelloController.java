@@ -30,9 +30,9 @@ public class HelloController {
     private Scene scene;
     private Parent root;
 
-    private final ObservableList<String> csDisplay = FXCollections.observableArrayList();
-    private int csCount = 0;
-    private int totalCred = 0;
+    private final ObservableList<String> csDisplay=FXCollections.observableArrayList();
+    private int csCount=0;
+    private double totalCred=0;
 
     @FXML
     protected void onHelloButtonClick() {
@@ -50,7 +50,7 @@ public class HelloController {
     }
 
     @FXML
-    private void handleAddCourse() {
+    private void AddCourse() {
         String name=csName.getText();
         String code=csNo.getText();
         String creds=cred.getText();
@@ -59,14 +59,13 @@ public class HelloController {
                 name.isEmpty() || code.isEmpty() || creds.isEmpty()) {
             return;
         }
-        int credit;
+        double credit;
         try {
-            credit=Integer.parseInt(creds);
+            credit=Double.parseDouble(creds);
         } catch (NumberFormatException e) {
             return;
         }
         csDisplay.add("course name: "+name + "  code: " + code + "  grade:" + grade + "  credit: " + credit + " cr");
-
         csCount++;
         totalCred+=credit;
         update();

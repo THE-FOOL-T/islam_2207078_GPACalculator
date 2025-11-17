@@ -33,7 +33,7 @@ public class HelloController {
     private final ObservableList<String> csDisplay=FXCollections.observableArrayList();
     private int csCount=0;
     private double totalCred=0;
-
+    private final ObservableList<courses>  fullcourse=FXCollections.observableArrayList();
     @FXML
     protected void onHelloButtonClick() {
         welcomeText.setText("Welcome to JavaFX Application!");
@@ -48,7 +48,7 @@ public class HelloController {
         }
         update();
     }
-
+    private final java.util.Map<String, courses> res = new java.util.HashMap<>();
     @FXML
     private void AddCourse() {
         String name=csName.getText();
@@ -69,6 +69,9 @@ public class HelloController {
         csCount++;
         totalCred+=credit;
         update();
+        courses cs=new courses(code,name,credit,teach1.getText(),teach2.getText(),grade,gradcal(grade));
+        fullcourse.add(cs);
+        res.put(code,cs);
         csName.clear();
         csNo.clear();
         teach1.clear();
@@ -76,13 +79,34 @@ public class HelloController {
         cred.clear();
         grad.getSelectionModel().clearSelection();
     }
-
+    public static class courses {
+        public final String code, name, teacher1, teacher2, grade;
+        public final double credit, gradePoint;
+        public courses(String code, String name, double credit, String teacher1, String teacher2, String grade, double gradePoint) {
+            this.code=code; this.name=name; this.credit=credit; this.teacher1=teacher1; this.teacher2=teacher2; this.grade=grade; this.gradePoint=gradePoint;
+        }
+    }
     private void update() {
         if (csCountL!=null) {
             csCountL.setText("Total Courses: "+csCount);
         }
         if (toalCredL!=null) {
             toalCredL.setText("Total Credits: "+totalCred);
+        }
+    }
+    private double gradcal(String grad) {
+        switch(grad){
+            case "A+":return 4.0;
+            case "A":return 3.75;
+            case "A-":return 3.5;
+            case "B+":return 3.25;
+            case "B":return 3.0;
+            case "B-":return 2.75;
+            case "C+":return 2.5;
+            case "C":return 2.25;
+            case "D":return 2.0;
+            case "F":return 0.0;
+            default:return 0.0;
         }
     }
 
@@ -94,9 +118,12 @@ public class HelloController {
         stage.show();
     }
     public void switchResult(ActionEvent event) throws IOException {
-        root=FXMLLoader.load(Objects.requireNonNull(getClass().getResource("result.fxml")));
-        stage=(Stage) ((Node)event.getSource()).getScene().getWindow();
+        FXMLLoader loader=new FXMLLoader(Objects.requireNonNull(getClass().getResource("result.fxml")));
+        root=loader.load();
+        resultController rc=loader.getController();
+        rc.setresult(fullcourse);
         scene=new Scene(root);
+        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene((scene));
         stage.show();
 

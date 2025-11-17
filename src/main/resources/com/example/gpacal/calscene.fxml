@@ -9,47 +9,44 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="432.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gpacal.HelloController">
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="432.0" prefWidth="600.0" style="-fx-background-color: #FAFAFA;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gpacal.HelloController">
 
     <top>
-        <AnchorPane prefHeight="100.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-            <Label alignment="CENTER" layoutX="228.0" layoutY="13.0" prefHeight="25.0" prefWidth="167.0" text="GPA CALCUATOR">
+        <AnchorPane prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: #FFFFFF;                            -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 4, 0, 0, 2);" BorderPane.alignment="CENTER">
+            <Label alignment="CENTER" layoutX="228.0" layoutY="13.0" prefHeight="25.0" prefWidth="167.0" style="-fx-text-fill: #212121; -fx-font-weight: 700;" text="GPA CALCULATOR">
                 <font>
-                    <Font size="15.0" />
+                    <Font size="18.0" />
                 </font>
             </Label>
-            <Button layoutX="6.0" layoutY="9.0" mnemonicParsing="false" onAction="#goBack" prefHeight="25.0" prefWidth="29.0" text="←" />
-            <Button layoutX="45.0" layoutY="9.0" mnemonicParsing="false" onAction="#reloadPage" prefHeight="25.0" prefWidth="29.0" text="⟳">
-                <font>
-                    <Font name="System Bold" size="10.0" />
-                </font>
+            <Button layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#goBack" prefHeight="39.0" prefWidth="51.0" style="-fx-background-color: #E0E0E0;                            -fx-text-fill: #424242;                            -fx-font-size: 18px;                            -fx-background-radius: 5;                            -fx-cursor: hand;                            -fx-font-weight: bold;" text="←" />
+            <Button layoutX="78.0" layoutY="11.0" mnemonicParsing="false" onAction="#reloadPage" prefHeight="30.0" prefWidth="35.0" style="-fx-background-color: #E0E0E0;                            -fx-text-fill: #424242;                            -fx-font-size: 16px;                            -fx-background-radius: 5;                            -fx-cursor: hand;                            -fx-font-weight: bold;" text="⟳">
             </Button>
-            <Label layoutX="12.0" layoutY="50.0" prefHeight="38.0" prefWidth="600.0" text="Enter course name, course No: , course teacher name ,course credit and grade to calculate your GPA" />
+            <Label layoutX="12.0" layoutY="55.0" prefHeight="35.0" prefWidth="576.0" style="-fx-text-fill: #616161; -fx-font-size: 14px;" text="Enter course name, course No, course teacher name, course credit and grade to calculate your GPA" />
         </AnchorPane>
     </top>
 
     <center>
-        <AnchorPane prefHeight="263.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="263.0" prefWidth="400.0" style="-fx-background-color: #FFFFFF;                            -fx-padding: 20;" BorderPane.alignment="CENTER">
             <children>
-                <TextField fx:id="csName" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="124.0" promptText="Enter Course name" />
-                <TextField fx:id="csNo" layoutX="158.0" layoutY="14.0" prefHeight="25.0" prefWidth="124.0" promptText="Enter Course No" />
-                <TextField fx:id="teach2" layoutX="158.0" layoutY="56.0" prefHeight="25.0" prefWidth="124.0" promptText="Teacher2 Name" />
-                <TextField fx:id="teach1" layoutX="14.0" layoutY="56.0" prefHeight="25.0" prefWidth="124.0" promptText="Teacher1 Name" />
-                <TextField fx:id="cred" layoutX="17.0" layoutY="95.0" prefHeight="25.0" prefWidth="121.0" promptText="Credit" />
-                <ComboBox fx:id="grad" layoutX="167.0" layoutY="95.0" prefHeight="25.0" prefWidth="94.0" promptText="Grade" />
-                <Button fx:id="addCourseBtn" layoutX="28.0" layoutY="147.0" mnemonicParsing="false" onAction="#AddCourse" prefHeight="25.0" prefWidth="100.0" text="Add Course" />
-                <Button fx:id="calculateBtn" layoutX="164.0" layoutY="147.0" mnemonicParsing="false" onAction="#switchResult" prefHeight="25.0" prefWidth="100.0" text="Calculate GPA" />
+                <TextField fx:id="csName" layoutX="14.0" layoutY="14.0" prefHeight="35.0" prefWidth="140.0" promptText="Course Name" style="-fx-background-color: #F5F5F5;                                  -fx-border-color: #BDBDBD;                                  -fx-border-width: 1;                                  -fx-border-radius: 5;                                  -fx-background-radius: 5;                                  -fx-padding: 8;                                  -fx-font-size: 13px;" />
+                <TextField fx:id="csNo" layoutX="165.0" layoutY="14.0" prefHeight="35.0" prefWidth="140.0" promptText="Course No" style="-fx-background-color: #F5F5F5;                                  -fx-border-color: #BDBDBD;                                  -fx-border-width: 1;                                  -fx-border-radius: 5;                                  -fx-background-radius: 5;                                  -fx-padding: 8;                                  -fx-font-size: 13px;" />
+                <TextField fx:id="teach1" layoutX="14.0" layoutY="60.0" prefHeight="35.0" prefWidth="140.0" promptText="Teacher 1" style="-fx-background-color: #F5F5F5;                                  -fx-border-color: #BDBDBD;                                  -fx-border-width: 1;                                  -fx-border-radius: 5;                                  -fx-background-radius: 5;                                  -fx-padding: 8;                                  -fx-font-size: 13px;" />
+                <TextField fx:id="teach2" layoutX="165.0" layoutY="60.0" prefHeight="35.0" prefWidth="140.0" promptText="Teacher 2" style="-fx-background-color: #F5F5F5;                                  -fx-border-color: #BDBDBD;                                  -fx-border-width: 1;                                  -fx-border-radius: 5;                                  -fx-background-radius: 5;                                  -fx-padding: 8;                                  -fx-font-size: 13px;" />
+                <TextField fx:id="cred" layoutX="14.0" layoutY="106.0" prefHeight="35.0" prefWidth="140.0" promptText="Credit" style="-fx-background-color: #F5F5F5;                                  -fx-border-color: #BDBDBD;                                  -fx-border-width: 1;                                  -fx-border-radius: 5;                                  -fx-background-radius: 5;                                  -fx-padding: 8;                                  -fx-font-size: 13px;" />
+                <ComboBox fx:id="grad" layoutX="165.0" layoutY="106.0" prefHeight="35.0" prefWidth="140.0" promptText="Select Grade" style="-fx-background-color: #F5F5F5;                                 -fx-border-color: #BDBDBD;                                 -fx-border-width: 1;                                 -fx-border-radius: 5;                                 -fx-background-radius: 5;                                 -fx-font-size: 13px;" />
+                <Button fx:id="addCourseBtn" layoutX="14.0" layoutY="160.0" mnemonicParsing="false" onAction="#AddCourse" prefHeight="38.0" prefWidth="140.0" style="-fx-background-color: #40e0d0; -fx-text-fill: black; -fx-font-size: 14px; -fx-font-weight: 600; -fx-background-radius: 6; -fx-cursor: hand; -fx-effect: dropshadow(three-pass-box, rgba(98,0,238,0.3), 6, 0, 0, 2);" text="Add Course" />
+                <Button fx:id="calculateBtn" layoutX="165.0" layoutY="160.0" mnemonicParsing="false" onAction="#switchResult" prefHeight="38.0" prefWidth="140.0" style="-fx-background-color: #800080; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: 600; -fx-background-radius: 6; -fx-cursor: hand; -fx-effect: dropshadow(three-pass-box, rgba(3,218,198,0.3), 6, 0, 0, 2);" text="Calculate GPA" />
             </children>
         </AnchorPane>
     </center>
 
     <right>
-        <AnchorPane prefWidth="280.0" BorderPane.alignment="CENTER">
+        <AnchorPane prefWidth="280.0" style="-fx-background-color: #FFFFFF;                            -fx-padding: 15;                            -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 4, 0, -2, 0);" BorderPane.alignment="CENTER">
             <children>
-                <Label fx:id="csCountL" layoutX="20.0" layoutY="5.0" text="Total Courses: 0" />
-                <Label fx:id="toalCredL" layoutX="20.0" layoutY="25.0" text="Total Credits: 0" />
-                <Label layoutX="20.0" layoutY="45.0" text="Courses Added" />
-                <ListView fx:id="cslist" layoutX="20.0" layoutY="65.0" prefHeight="260.0" prefWidth="240.0" />
+                <Label fx:id="csCountL" layoutX="15.0" layoutY="10.0" style="-fx-text-fill: #424242; -fx-font-size: 13px; -fx-font-weight: 600;" text="Total Courses: 0" />
+                <Label fx:id="toalCredL" layoutX="15.0" layoutY="32.0" style="-fx-text-fill: #424242; -fx-font-size: 13px; -fx-font-weight: 600;" text="Total Credits: 0" />
+                <Label layoutX="15.0" layoutY="60.0" style="-fx-text-fill: #6200EE; -fx-font-size: 14px; -fx-font-weight: 700;" text="Courses Added" />
+                <ListView fx:id="cslist" layoutX="15.0" layoutY="85.0" prefHeight="245.0" prefWidth="250.0" style="-fx-background-color: #FAFAFA;                                 -fx-border-color: #E0E0E0;                                 -fx-border-width: 1;                                 -fx-border-radius: 5;                                 -fx-background-radius: 5;                                 -fx-font-size: 12px;" />
             </children>
         </AnchorPane>
     </right>

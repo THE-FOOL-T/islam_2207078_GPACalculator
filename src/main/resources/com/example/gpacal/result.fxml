@@ -11,56 +11,117 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gpacal.resultController">
+<?import javafx.scene.layout.HBox?>
+<BorderPane style="-fx-background-color: #FAFAFA;"
+            xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.gpacal.resultController">
     <top>
-        <VBox spacing="12" BorderPane.alignment="CENTER">
-            <AnchorPane prefHeight="26.0" prefWidth="830.0">
+        <VBox spacing="0" BorderPane.alignment="CENTER"
+              style="-fx-background-color: #FFFFFF;
+                     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 6, 0, 0, 2);">
+            <AnchorPane prefHeight="60.0" prefWidth="830.0">
                 <children>
-                    <Label alignment="CENTER" layoutY="4.0" prefHeight="20.0" prefWidth="830.0" text="Result ">
+                    <Label alignment="CENTER" layoutY="18.0" prefHeight="25.0" prefWidth="830.0"
+                           text="GPA Result Summary"
+                           style="-fx-text-fill: #212121; -fx-font-weight: 700;">
                         <font>
-                            <Font size="14.0" />
+                            <Font size="20.0" />
                         </font>
                     </Label>
-                    <Separator />
                 </children>
             </AnchorPane>
+            <Separator style="-fx-background-color: #E0E0E0;" />
         </VBox>
     </top>
+
     <center>
-        <VBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
+        <VBox alignment="TOP_CENTER" BorderPane.alignment="CENTER"
+              style="-fx-background-color: #FFFFFF;">
             <padding>
-                <Insets bottom="20" left="20" right="20" top="20" />
+                <Insets bottom="25" left="25" right="25" top="25" />
             </padding>
-            <TableView fx:id="courseTableView">
+            <TableView fx:id="courseTableView"
+                       style="-fx-background-color: #FAFAFA;
+                             -fx-border-color: #E0E0E0;
+                             -fx-border-width: 1;
+                             -fx-border-radius: 8;
+                             -fx-background-radius: 8;
+                             -fx-table-cell-border-color: #E0E0E0;">
                 <columns>
-                    <TableColumn fx:id="serialColumn" minWidth="60.0" text="Sl. No." />
-                    <TableColumn fx:id="codeColumn" minWidth="100.0" text="Course No." />
-                    <TableColumn fx:id="nameColumn" minWidth="200.0" text="Course Title" />
-                    <TableColumn fx:id="creditColumn" minWidth="80.0" text="Credit" />
-                    <TableColumn fx:id="teacher1Column" minWidth="130.0" text="Teacher 1" />
-                    <TableColumn fx:id="teacher2Column" minWidth="130.0" text="Teacher 2" />
-                    <TableColumn fx:id="gradePointColumn" minWidth="100.0" text="Grade Point" />
-                    <TableColumn fx:id="gradeColumn" minWidth="100.0" text="Letter Grade" />
+                    <TableColumn fx:id="serialColumn" minWidth="60.0" text="Sl. No."
+                                 style="-fx-alignment: CENTER; -fx-font-weight: 600;" />
+                    <TableColumn fx:id="codeColumn" minWidth="100.0" text="Course No."
+                                 style="-fx-alignment: CENTER; -fx-font-weight: 600;" />
+                    <TableColumn fx:id="nameColumn" minWidth="200.0" text="Course Title"
+                                 style="-fx-alignment: CENTER-LEFT; -fx-font-weight: 600;" />
+                    <TableColumn fx:id="creditColumn" minWidth="80.0" text="Credit"
+                                 style="-fx-alignment: CENTER; -fx-font-weight: 600;" />
+                    <TableColumn fx:id="teacher1Column" minWidth="130.0" text="Teacher 1"
+                                 style="-fx-alignment: CENTER; -fx-font-weight: 600;" />
+                    <TableColumn fx:id="teacher2Column" minWidth="130.0" text="Teacher 2"
+                                 style="-fx-alignment: CENTER; -fx-font-weight: 600;" />
+                    <TableColumn fx:id="gradePointColumn" minWidth="100.0" text="Grade Point"
+                                 style="-fx-alignment: CENTER; -fx-font-weight: 600;" />
+                    <TableColumn fx:id="gradeColumn" minWidth="100.0" text="Letter Grade"
+                                 style="-fx-alignment: CENTER; -fx-font-weight: 600;" />
                 </columns>
             </TableView>
         </VBox>
     </center>
+
     <bottom>
-        <VBox alignment="CENTER" prefHeight="149.0" prefWidth="963.0" spacing="14" BorderPane.alignment="CENTER">
+        <VBox alignment="CENTER" spacing="18" BorderPane.alignment="CENTER"
+              style="-fx-background-color: #FFFFFF;
+                     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 6, 0, 0, -2);">
             <padding>
-                <Insets bottom="20" top="20" />
+                <Insets bottom="25" top="25" left="20" right="20" />
             </padding>
-            <Separator />
-            <Label fx:id="congratsL" text="Congratulations! Your GPA is shown below." />
-            <Label fx:id="totalcredL" text="Credit Completed : 0" />
-            <Label fx:id="gpaL" text="GPA : 0.00" />
-         <AnchorPane prefHeight="200.0" prefWidth="200.0">
-            <children>
-               <Button layoutX="372.0" mnemonicParsing="false" onAction="#calculateAgain" text="calculate again" />
-               <Button layoutX="532.0" mnemonicParsing="false" onAction="#goHome" text="Go home" />
-            </children>
-         </AnchorPane>
-            
+            <Separator style="-fx-background-color: #E0E0E0;" />
+
+            <Label fx:id="congratsL" text="Congratulations! Your GPA is shown below."
+                   style="-fx-text-fill: #388E3C;
+                         -fx-font-size: 16px;
+                         -fx-font-weight: 700;
+                         -fx-padding: 10 0 5 0;" />
+
+            <HBox alignment="CENTER" spacing="40">
+                <Label fx:id="totalcredL" text="Credit Completed : 0"
+                       style="-fx-text-fill: #424242;
+                             -fx-font-size: 15px;
+                             -fx-font-weight: 600;
+                             -fx-padding: 8 16 8 16;
+                             -fx-background-color: #E3F2FD;
+                             -fx-background-radius: 6;" />
+                <Label fx:id="gpaL" text="GPA : 0.00"
+                       style="-fx-text-fill: #FFFFFF;
+                             -fx-font-size: 18px;
+                             -fx-font-weight: 700;
+                             -fx-padding: 10 20 10 20;
+                             -fx-background-color: #6200EE;
+                             -fx-background-radius: 8;
+                             -fx-effect: dropshadow(three-pass-box, rgba(98,0,238,0.4), 8, 0, 0, 3);" />
+            </HBox>
+
+            <HBox alignment="CENTER" spacing="20" style="-fx-padding: 15 0 0 0;">
+                <Button mnemonicParsing="false" onAction="#calculateAgain"
+                        prefHeight="40.0" prefWidth="150.0" text="Calculate Again"
+                        style="-fx-background-color: #6200EE;
+                               -fx-text-fill: white;
+                               -fx-font-size: 14px;
+                               -fx-font-weight: 600;
+                               -fx-background-radius: 8;
+                               -fx-cursor: hand;
+                               -fx-effect: dropshadow(three-pass-box, rgba(98,0,238,0.3), 8, 0, 0, 3);" />
+                <Button mnemonicParsing="false" onAction="#goHome"
+                        prefHeight="40.0" prefWidth="120.0" text="Home"
+                        style="-fx-background-color: #03DAC6;
+                               -fx-text-fill: #000000;
+                               -fx-font-size: 14px;
+                               -fx-font-weight: 600;
+                               -fx-background-radius: 8;
+                               -fx-cursor: hand;
+                               -fx-effect: dropshadow(three-pass-box, rgba(3,218,198,0.3), 8, 0, 0, 3);" />
+            </HBox>
         </VBox>
     </bottom>
 </BorderPane>

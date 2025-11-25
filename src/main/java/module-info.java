@@ -11,6 +11,7 @@ module com.example.gpacal {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires java.desktop;
+    requires java.sql;
 
     opens com.example.gpacal to javafx.fxml;
     exports com.example.gpacal;

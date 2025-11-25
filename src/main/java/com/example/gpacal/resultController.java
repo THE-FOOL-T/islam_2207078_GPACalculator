@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -13,34 +14,41 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.event.ActionEvent;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.Objects;
 
 public class resultController {
+
     @FXML
     private TableView<CourseRow> courseTableView;
     @FXML
-    private TableColumn<CourseRow,Integer> serialColumn;
+    private TableColumn<CourseRow, Integer> serialColumn;
     @FXML
-    private TableColumn<CourseRow,String> codeColumn;
+    private TableColumn<CourseRow, String> codeColumn;
     @FXML
-    private TableColumn<CourseRow,String> nameColumn;
+    private TableColumn<CourseRow, String> nameColumn;
     @FXML
-    private TableColumn<CourseRow,Double> creditColumn;
+    private TableColumn<CourseRow, Double> creditColumn;
     @FXML
-    private TableColumn<CourseRow,String> teacher1Column;
+    private TableColumn<CourseRow, String> teacher1Column;
     @FXML
-    private TableColumn<CourseRow,String> teacher2Column;
+    private TableColumn<CourseRow, String> teacher2Column;
     @FXML
-    private TableColumn<CourseRow,String> gradeColumn;
+    private TableColumn<CourseRow, String> gradeColumn;
     @FXML
-    private TableColumn<CourseRow,Double> gradePointColumn;
+    private TableColumn<CourseRow, Double> gradePointColumn;
     @FXML
     private Label totalcredL, gpaL, congratsL;
+
+    @FXML
+    private TextField rollField, nameField;
+
+    private double finalGpa = 0.0;
 
     @FXML
     public void initialize() {
@@ -58,27 +66,23 @@ public class resultController {
         courseTableView.setMaxHeight(TableView.USE_COMPUTED_SIZE);
     }
 
-
     public void setresult(ObservableList<HelloController.courses> courseList) {
         ObservableList<CourseRow> tableData = FXCollections.observableArrayList();
         double totalCredits = 0;
         double totalPoints = 0;
         int count = 1;
 
-        boolean t1=false;
-        boolean t2=false;
+        boolean t1 = false;
+        boolean t2 = false;
 
         for (HelloController.courses c : courseList) {
-            if (c.teacher1!=null && !c.teacher1.trim().isEmpty()) {
-                t1=true;
-            }
-            if (c.teacher2!=null && !c.teacher2.trim().isEmpty()) {
-                t2=true;
-            }
+            if (c.teacher1 != null && !c.teacher1.trim().isEmpty()) t1 = true;
+            if (c.teacher2 != null && !c.teacher2.trim().isEmpty()) t2 = true;
         }
 
         teacher1Column.setVisible(t1);
         teacher2Column.setVisible(t2);
+
         serialColumn.setMinWidth(60);
         codeColumn.setMinWidth(100);
         nameColumn.setMinWidth(200);
@@ -87,45 +91,82 @@ public class resultController {
         gradePointColumn.setMinWidth(100);
         teacher1Column.setMinWidth(130);
         teacher2Column.setMinWidth(130);
-        for (HelloController.courses c:courseList) {
+
+        for (HelloController.courses c : courseList) {
             tableData.add(new CourseRow(count++, c.code, c.name, c.credit, c.teacher1, c.teacher2, c.grade, c.gradePoint));
-            totalCredits+=c.credit;
-            totalPoints+=c.credit*c.gradePoint;
+            totalCredits += c.credit;
+            totalPoints += c.credit * c.gradePoint;
         }
+
         courseTableView.setItems(tableData);
+
         double rowHeight = 28.0;
         double headerHeight = 32.0;
         double calculatedHeight = headerHeight + (tableData.size() * rowHeight) + 2;
+
         courseTableView.setMinHeight(calculatedHeight);
         courseTableView.setPrefHeight(calculatedHeight);
         courseTableView.setMaxHeight(calculatedHeight);
-        double gpa;
-        if (totalCredits == 0) {
-            gpa = 0.0;
-        } else {
-            gpa=totalPoints/totalCredits;
-        }
-        totalcredL.setText("Credit Completed : " + String.format("%.2f", totalCredits));
+
+        double gpa = (totalCredits == 0) ? 0.0 : totalPoints / totalCredits;
+        finalGpa = gpa;
+
+        totalcredL.setText("Credit Continued : " + String.format("%.2f", totalCredits));
         gpaL.setText("GPA : " + String.format("%.2f", gpa));
         congratsL.setText("Congratulations! Your GPA is shown below.");
     }
 
-
-
-    public void calculateAgain(javafx.event.ActionEvent event) throws IOException {
+    public void calculateAgain(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("calscene.fxml")));
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-    public void goHome(javafx.event.ActionEvent event) throws IOException {
-        Parent root=FXMLLoader.load(Objects.requireNonNull(getClass().getResource("hello-view.fxml")));
-        Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-        Scene scene=new Scene(root);
+    public void goHome(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("hello-view.fxml")));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    public void saveResult() {
+        String roll = (rollField == null) ? "" : rollField.getText().trim();
+        String name = (nameField == null) ? "" : nameField.getText().trim();
+
+        if (roll.isEmpty() || name.isEmpty()) {
+            System.out.println("Roll and Name are required to save result.");
+            return;
+        }
+
+        double gpaToSave = finalGpa;
+
+        Task<Boolean> task = db.insertStudentTask(roll, name, gpaToSave);
+        task.setOnSucceeded(e -> System.out.println("Saved: " + roll + " -> " + gpaToSave));
+        task.setOnFailed(e -> {
+            System.err.println("Save failed for roll: " + roll);
+            task.getException().printStackTrace();
+        });
+        new Thread(task).start();
+
+        rollField.clear();
+        nameField.clear();
+    }
+
+    @FXML
+    public void viewRecords(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("database.fxml")));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static class CourseRow {
@@ -138,7 +179,8 @@ public class resultController {
         private final SimpleStringProperty grade;
         private final SimpleDoubleProperty gradePoint;
 
-        public CourseRow(int serial, String code, String name, double credit, String teacher1, String teacher2, String grade, double gradePoint) {
+        public CourseRow(int serial, String code, String name, double credit,
+                         String teacher1, String teacher2, String grade, double gradePoint) {
             this.serial = new SimpleIntegerProperty(serial);
             this.code = new SimpleStringProperty(code);
             this.name = new SimpleStringProperty(name);
@@ -173,7 +215,4 @@ public class resultController {
         public double getGradePoint() { return gradePoint.get(); }
         public SimpleDoubleProperty gradePointProperty() { return gradePoint; }
     }
-
-
-
 }
